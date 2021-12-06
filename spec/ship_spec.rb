@@ -32,4 +32,12 @@ RSpec.describe Ship do
     subject.hit
     expect(subject.health).to eq(1)
   end
+
+  it "is sunk when health is 0" do
+
+    expect(subject.health).to eq (3)
+
+    3.times {subject.hit}
+    expect(subject.sunk?).to be true
+  end
 end
