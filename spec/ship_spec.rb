@@ -18,4 +18,9 @@ RSpec.describe Ship do
 
     expect(subject.health).to eq(3)
   end
+
+  it "by default is not sunk" do
+
+    expect(subject.sunk?).to be false
+  end
 end
