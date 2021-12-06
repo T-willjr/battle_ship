@@ -23,4 +23,13 @@ RSpec.describe Ship do
 
     expect(subject.sunk?).to be false
   end
+
+  it "can take a hit" do
+
+    subject.hit
+    expect(subject.health).to eq(2)
+
+    subject.hit
+    expect(subject.health).to eq(1)
+  end
 end
