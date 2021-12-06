@@ -14,4 +14,8 @@ RSpec.describe Ship do
     expect(subject.length).to eq(3)
   end
 
+  it "has health" do
+
+    expect(subject.health).to eq(3)
+  end
 end
