@@ -15,16 +15,15 @@ RSpec.describe Ship do
   end
 
   it "has health" do
-
     expect(subject.health).to eq(3)
   end
 
-  it "by default is not sunk" do
+  it "by default is not #sunk" do
 
     expect(subject.sunk?).to be false
   end
 
-  it "can take a hit" do
+  it "can take a #hit" do
 
     subject.hit
     expect(subject.health).to eq(2)
@@ -33,7 +32,7 @@ RSpec.describe Ship do
     expect(subject.health).to eq(1)
   end
 
-  it "is sunk when health is 0" do
+  it "is #sunk when health is 0" do
 
     expect(subject.health).to eq (3)
 
