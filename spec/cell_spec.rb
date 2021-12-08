@@ -10,8 +10,20 @@ RSpec.describe Cell do
     expect(subject.coordinate).to eq('B4')
   end
 
+  it "#ship" do
+
+    expect(subject.ship).to eq([])
+  end
+
   it "#empty?" do
 
     expect(subject.empty?).to be true
+  end
+
+  it "#place_ship" do
+    cruiser = Ship.new("Cruiser", 3)
+    subject.place_ship(cruiser)
+    expect(subject.ship).to eq([cruiser])
+    expect(subject.empty?).to be false
   end
 end
