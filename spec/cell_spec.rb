@@ -12,7 +12,7 @@ RSpec.describe Cell do
 
   it "#ship" do
 
-    expect(subject.ship).to eq([])
+    expect(subject.ship).to be nil
   end
 
   it "#empty?" do
@@ -23,18 +23,19 @@ RSpec.describe Cell do
   it "#place_ship" do
     cruiser = Ship.new("Cruiser", 3)
     subject.place_ship(cruiser)
-    expect(subject.ship).to eq([cruiser])
+    expect(subject.ship).to eq(cruiser)
     expect(subject.empty?).to be false
   end
 
   it "#fired_upon?" do
     cruiser = Ship.new("Cruiser", 3)
+
+    subject.place_ship(cruiser)
+
     expect(subject.fired_upon?).to be false
-    
-    # subject.fired_upon
-    # expect(subject.fired_upon?).to be true
-    # expect(subject.ship.health).to eq(2)
+
+      subject.fire_upon
+    expect(subject.fired_upon?).to be true
+    expect(subject.ship.health).to eq(2)
   end
-
-
 end
