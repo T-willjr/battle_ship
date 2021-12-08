@@ -14,4 +14,12 @@ class Cell
     @ship << ship_type
 
   end
+
+  def fired_upon?
+    false
+  end
+
+  def fire_upon
+  end
+
 end

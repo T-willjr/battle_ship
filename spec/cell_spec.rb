@@ -26,4 +26,15 @@ RSpec.describe Cell do
     expect(subject.ship).to eq([cruiser])
     expect(subject.empty?).to be false
   end
+
+  it "#fired_upon?" do
+    cruiser = Ship.new("Cruiser", 3)
+    expect(subject.fired_upon?).to be false
+    
+    # subject.fired_upon
+    # expect(subject.fired_upon?).to be true
+    # expect(subject.ship.health).to eq(2)
+  end
+
+
 end
