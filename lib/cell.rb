@@ -40,7 +40,7 @@ class Cell
       "M"
     elsif fired_upon? == true && empty? == false && ship.health > 0
       "H"
-    elsif fired_upon? == true && empty? == false && ship.health = 0
+    elsif fired_upon? == true && empty? == false && ship.health == 0
       "X"
 
 
