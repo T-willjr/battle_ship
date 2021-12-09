@@ -18,12 +18,26 @@ class Cell
 
   def fired_upon?
     return false if @hit == false
-    true 
+    true
   end
 
   def fire_upon
     @ship.hit
     @hit = true
+  end
+
+  def render
+    if cell.fired_upon? == false
+      return "."
+    # elsif #
+    #   return "M"
+    # elsif #
+    #   return "H"
+    # elsif #
+    #   return "X"
+
+
+    end
   end
 
 end
