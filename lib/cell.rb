@@ -20,8 +20,6 @@ class Cell
   def fired_upon?
     return false if @fired_at_cell == false
     true
-    # ship.hit == true
-
   end
 
   def fire_upon
