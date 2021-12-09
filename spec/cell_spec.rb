@@ -29,18 +29,24 @@ RSpec.describe Cell do
 
   it "#fired_upon?" do
     cruiser = Ship.new("Cruiser", 3)
+    cell = Cell.new("B4")
+    cell.place_ship(cruiser)
 
-    subject.place_ship(cruiser)
+    expect(cell.fired_upon?).to be false
 
-    expect(subject.fired_upon?).to be false
-
-      subject.fire_upon
-    expect(subject.fired_upon?).to be true
-    expect(subject.ship.health).to eq(2)
+      cell.fire_upon
+    expect(cell.fired_upon?).to be true
+    expect(cell.ship.health).to eq(2)
   end
 
-  it "#render" do
+  it "#render a cell that has not been fired_upon?" do
     cell_1 = Cell.new("B4")
     expect(cell_1.render).to eq(".")
+  end
+
+  it "#render a miss" do
+    cell_1 = Cell.new("B4")
+    cell_1.fire_upon
+    expect(cell_1.render).to eq("M")
   end
 end
