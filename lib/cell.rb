@@ -1,3 +1,4 @@
+require 'pry'
 class Cell
   attr_reader :coordinate, :ship
 
@@ -33,17 +34,20 @@ class Cell
     end
   end
 
-  def render
-    if fired_upon? == false
+  def render(show_ship = false)
+
+    if show_ship == true && empty? == false && fired_upon? == false
+      "S"
+     #elsif show_ship == false
+
+   elsif show_ship == false && fired_upon? == false
       "."
-    elsif fired_upon? == true && empty? == true
+    elsif show_ship == false && fired_upon? == true && empty? == true
       "M"
-    elsif fired_upon? == true && empty? == false && ship.health > 0
+    elsif show_ship == false && fired_upon? == true && empty? == false && ship.health > 0
       "H"
-    elsif fired_upon? == true && empty? == false && ship.health == 0
+    elsif show_ship == false && fired_upon? == true && empty? == false && ship.health == 0
       "X"
-
-
     end
   end
 
