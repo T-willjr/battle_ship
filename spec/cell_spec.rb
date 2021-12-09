@@ -22,6 +22,7 @@ RSpec.describe Cell do
 
   it "#place_ship" do
     cruiser = Ship.new("Cruiser", 3)
+
     subject.place_ship(cruiser)
     expect(subject.ship).to eq(cruiser)
     expect(subject.empty?).to be false
@@ -30,6 +31,7 @@ RSpec.describe Cell do
   it "#fired_upon?" do
     cruiser = Ship.new("Cruiser", 3)
     cell = Cell.new("B4")
+
     cell.place_ship(cruiser)
 
     expect(cell.fired_upon?).to be false
@@ -41,11 +43,13 @@ RSpec.describe Cell do
 
   it "#render a cell that has not been fired_upon?" do
     cell_1 = Cell.new("B4")
+
     expect(cell_1.render).to eq(".")
   end
 
   it "#render a miss" do
     cell_1 = Cell.new("B4")
+
     cell_1.fire_upon
     expect(cell_1.render).to eq("M")
   end
@@ -54,6 +58,7 @@ RSpec.describe Cell do
     cell_1 = Cell.new("B4")
     cell_2 = Cell.new("C3")
     cruiser = Ship.new("Cruiser", 3)
+
     cell_2.place_ship(cruiser)
     cell_2.fire_upon
     expect(cell_2.render).to eq("H")
@@ -63,10 +68,9 @@ RSpec.describe Cell do
     cell_1 = Cell.new("B4")
     cell_2 = Cell.new("C3")
     cruiser = Ship.new("Cruiser", 3)
+
     cell_2.place_ship(cruiser)
-    cell_2.fire_upon
-    cell_2.fire_upon
-    cell_2.fire_upon
+    3.times {cell_2.fire_upon}
     expect(cell_2.render).to eq("X")
   end
 
@@ -74,9 +78,10 @@ RSpec.describe Cell do
     cell_1 = Cell.new("B4")
     cell_2 = Cell.new("C3")
     cruiser = Ship.new("Cruiser", 3)
+
     cell_2.place_ship(cruiser)
-    cell_2.render(true)
-    expect(cell_2.render).to eq("S")
+    cell_2.render
+    expect(cell_2.render(true)).to eq("S")
   end
 
 end
