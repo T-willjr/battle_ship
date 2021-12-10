@@ -23,8 +23,15 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
+
+    letters = coordinates.map { |coordinate| coordinate.scan(/\D+/).first }
+    a_ord = letters.each_cons(2).all? { |a, b| b.ord == a.ord + 1 }
+
     nums = coordinates.map { |coordinate| coordinate.scan(/\d+/).first.to_i }
-    nums.each_cons(2).all? { |a, b| b == a + 1 }
+    num_ord = nums.each_cons(2).all? { |a, b| b == a + 1 }
+
+    return false if a_ord == true && num_ord == true
+    true
 
     #ship.length == coordinates.length ***Test 1***
   end
