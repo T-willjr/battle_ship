@@ -23,4 +23,8 @@ class Board
     false
   end
 
+  def valid_placement?(ship, coordinates)
+    ship.length == coordinates.length
+  end
+
 end
