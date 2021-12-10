@@ -19,12 +19,14 @@ class Board
   end
 
   def valid_coordinate?(coordinate)
-    return true if @cell_hash.keys.include?(coordinate)
-    false
+    @cell_hash.keys.include?(coordinate)
   end
 
   def valid_placement?(ship, coordinates)
-    ship.length == coordinates.length
+    nums = coordinates.map { |coordinate| coordinate.scan(/\d+/).first.to_i }
+    nums.each_cons(2).all? { |a, b| b == a + 1 }
+
+    #ship.length == coordinates.length ***Test 1***
   end
 
 end
