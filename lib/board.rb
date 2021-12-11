@@ -23,9 +23,12 @@ class Board
     false
   end
 
-  def place(ship, [coordinates])
+  def place(ship, coordinates)
 
-  cell.ship << 
+  # cell.ship = nil,
+  #need to add ship name to cell object that
+  #matches coordinates with given coodinate values
+
 
   end
 
