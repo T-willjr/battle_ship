@@ -23,4 +23,10 @@ class Board
     false
   end
 
+  def place(ship, [coordinates])
+
+  cell.ship << 
+
+  end
+
 end
