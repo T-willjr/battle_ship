@@ -45,12 +45,16 @@ class Board
   # ["A1", "A2", "A4"] = false then num_ord is false
 
   def place(ship, coordinates)
+    if valid_placement?(ship, coordinates) == true
+      coordinates.map do |cord|
+        @cell_hash[cord].place_ship(ship)
+      end
 
+    end
+# binding.pry
   # cell.ship = nil,
   #need to add ship name to cell object that
   #matches coordinates with given coodinate values
-
-
   end
 
 end
