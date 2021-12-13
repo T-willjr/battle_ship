@@ -74,10 +74,10 @@ RSpec.describe Board do
 
       board.place(cruiser, ["A1", "A2", "A3"])
 
-      expect(cell_1.ship).to_not eq(nil)
-      expect(cell_2).to_not eq(nil)
-      expect(cell_3).to_not eq(nil)
-      expect(cell_4.ship).to eq(nil)
+      expect(cell_1.ship).to eq(cruiser)
+      # expect(cell_2.ship).to eq(cruiser)
+      # expect(cell_3.ship).to eq(cruiser)
+      # expect(cell_4.ship).to eq(nil)
 
     end
 

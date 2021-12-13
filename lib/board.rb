@@ -46,15 +46,14 @@ class Board
 
   def place(ship, coordinates)
     if valid_placement?(ship, coordinates) == true
-      coordinates.map do |cord|
+      coordinates.each do |cord|
+        binding.pry
         @cell_hash[cord].place_ship(ship)
       end
 
     end
-# binding.pry
-  # cell.ship = nil,
-  #need to add ship name to cell object that
-  #matches coordinates with given coodinate values
+
+
   end
 
 end
