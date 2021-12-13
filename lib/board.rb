@@ -23,22 +23,30 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-
-    letters = coordinates.map { |coordinate| coordinate.scan(/\D+/).first }
-    let_ord = letters.each_cons(2).all? { |a, b| b.ord == a.ord + 1 }
-
-    nums = coordinates.map { |coordinate| coordinate.scan(/\d+/).first.to_i }
-    num_ord = nums.each_cons(2).all? { |a, b| b == a + 1 }
-
-    if let_ord == true && num_ord == true || ship.length != coordinates.length || num_ord == false && let_ord == false
+    if valid_letter_order?(coordinates) == false && valid_number_order?(coordinates) == false || valid_ship_length?(ship, coordinates) == false  || valid_letter_order?(coordinates) == true && valid_number_order?(coordinates) == true
       false
     else
       true
     end
-
   end
 
+  def valid_ship_length?(ship, coordinates)
+    ship.length == coordinates.length
+  end
+
+  def valid_letter_order?(coordinate)
+    letters = coordinate.map { |coordinate| coordinate.scan(/\D+/).first }
+    let_ord = letters.each_cons(2).all? { |a, b| b.ord == a.ord + 1 }
+  end
+
+  def valid_number_order?(coordinate)
+    nums = coordinate.map { |coordinate| coordinate.scan(/\d+/).first.to_i }
+    num_ord = nums.each_cons(2).all? { |a, b| b == a + 1 }
+  end
 end
+
+
+#row_a, row_b, row_c, row_d = @cell_hash.cons(4) { |key,value| "value.render }
 
 # If let_ord is true it goes from A -> B -> C
 # If num_ord is true it goes from 1 -> 2 -> 3
