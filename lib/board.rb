@@ -1,4 +1,4 @@
-require 'cell'
+# require 'cell'
 require 'pry'
 
 class Board
@@ -47,7 +47,6 @@ class Board
   def place(ship, coordinates)
     if valid_placement?(ship, coordinates) == true
       coordinates.each do |cord|
-        binding.pry
         @cell_hash[cord].place_ship(ship)
       end
 
