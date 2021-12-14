@@ -1,5 +1,5 @@
 require 'pry'
-
+require 'cell'
 class Board
   attr_reader :cell_hash
 
@@ -25,6 +25,12 @@ class Board
     @cell_hash.keys.include?(coordinate)
   end
 
+  def ship_overlap?(coordinates)
+    coordinates.any? { |cord|
+      @cell_hash[cord].empty? == false}
+
+  end
+
   def valid_placement?(ship, coordinates)
 
     letters = coordinates.map { |coordinate| coordinate.scan(/\D+/).first }
@@ -33,7 +39,7 @@ class Board
     nums = coordinates.map { |coordinate| coordinate.scan(/\d+/).first.to_i }
     num_ord = nums.each_cons(2).all? { |a, b| b == a + 1 }
 
-    if let_ord == true && num_ord == true || ship.length != coordinates.length || num_ord == false && let_ord == false
+    if let_ord == true && num_ord == true || ship.length != coordinates.length || num_ord == false && let_ord == false || ship_overlap?(coordinates) == true
       false
     else
       true
@@ -55,7 +61,5 @@ class Board
 
     end
 
-
   end
-
 end
