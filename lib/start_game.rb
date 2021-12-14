@@ -2,7 +2,8 @@ require './lib/board'
 
 class StartGame
   def initialize
-      computer = ComputerPlayer.new
+      @computer = ComputerPlayer.new
+      @player = Player.new
   end
 
   def main_menu
@@ -15,8 +16,8 @@ class StartGame
   def main_menu_options(user_input)
     case user_input
     when "P"
-      "test"
-      computer.computer_setup
+      @computer.computer_setup
+      @player.player_setup
     when "Q"
       exit
     end
