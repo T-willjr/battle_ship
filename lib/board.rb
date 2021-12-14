@@ -18,17 +18,15 @@ class Board
     coordinates.each do |coordinate|
       @cell_hash[coordinate] = Cell.new(coordinate)
     end
-
   end
 
   def valid_coordinate?(coordinate)
     @cell_hash.keys.include?(coordinate)
   end
-
-  def ship_overlap?(coordinates)
+  
+   def ship_overlap?(coordinates)
     coordinates.any? { |cord|
       @cell_hash[cord].empty? == false}
-
   end
 
   def valid_placement?(ship, coordinates)
@@ -63,3 +61,11 @@ class Board
 
   end
 end
+
+# If let_ord is true it goes from A -> B -> C
+# If num_ord is true it goes from 1 -> 2 -> 3
+
+# If let_ord is false letters not alphabetical
+# If num_ord is false numbers not in order
+# ["A1", "B2", "C3"] = false then let_ord && num_ord is true
+# ["A1", "A2", "A4"] = false then num_ord is false
