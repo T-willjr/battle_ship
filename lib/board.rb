@@ -24,8 +24,14 @@ class Board
   def valid_coordinate?(coordinate)
     @cell_hash.keys.include?(coordinate)
   end
+  
+   def ship_overlap?(coordinates)
+    coordinates.any? { |cord|
+      @cell_hash[cord].empty? == false}
+  end
 
   def valid_placement?(ship, coordinates)
+
     if valid_letter_order?(coordinates) == false && valid_number_order?(coordinates) == false || valid_ship_length?(ship, coordinates) == false  || valid_letter_order?(coordinates) == true && valid_number_order?(coordinates) == true || ship_overlap?(coordinates) == true
       false
     else
@@ -33,14 +39,16 @@ class Board
     end
   end
 
-  def ship_overlap?(coordinates)
-    coordinates.any? { |cord|
-      @cell_hash[cord].empty? == false }
-  end
-
   def valid_ship_length?(ship, coordinates)
     ship.length == coordinates.length
   end
+
+  def place(ship, coordinates)
+    if valid_placement?(ship, coordinates) == true
+      coordinates.each do |cord|
+        @cell_hash[cord].place_ship(ship)
+      end
+
 
   def valid_letter_order?(coordinate)
     letters = coordinate.map { |coordinate| coordinate.scan(/\D+/).first }
