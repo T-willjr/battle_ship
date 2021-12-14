@@ -6,6 +6,8 @@ require './lib/cell'
 
 RSpec.describe Board do
   subject {board = Board.new}
+  let(:cruiser) { Ship.new("Cruiser", 3) }
+  let(:submarine) { Ship.new("Submarine", 2) }
   context "The Cells" do
 
     it "exists" do
@@ -13,6 +15,7 @@ RSpec.describe Board do
     end
 
     it "has cells" do
+
       expect(subject.cell_hash.count).to eq(16)
 
       subject.cell_hash.each do |coordinate, cell|
@@ -23,6 +26,7 @@ RSpec.describe Board do
 
   context "#Validating Coordinates" do
     it "tells us if a coordinate is on board" do
+      
       expect(subject.valid_coordinate?("A1")).to be true
       expect(subject.valid_coordinate?("D4")).to be true
       expect(subject.valid_coordinate?("A5")).to be false
@@ -32,11 +36,8 @@ RSpec.describe Board do
   end
 
   context "#valid_placement?" do
-    let(:cruiser) { Ship.new("Cruiser", 3) }
-    let(:submarine) { Ship.new("Submarine", 2) }
 
     it "validates that ship will fit in coordinates" do
-
 
       expect(subject.valid_placement?(cruiser, ["A1", "A2"])).to be false
       expect(subject.valid_placement?(submarine, ["A2", "A3", "A4"])).to be false
@@ -58,6 +59,7 @@ RSpec.describe Board do
     end
 
     it "makes sure happy paths work" do
+
       expect(subject.valid_placement?(submarine, ["A1", "A2"])).to be true
       expect(subject.valid_placement?(cruiser, ["B1", "C1", "D1"])).to be true
     end
@@ -69,7 +71,6 @@ RSpec.describe Board do
       board.place(cruiser, ["A1", "A2", "A3"])
 
       expect(board.valid_placement?(submarine, ["A1", "B1"])).to eq(false)
-
     end
 
     it "#place a ship, check that all corresponding cells are occupied" do
@@ -87,5 +88,14 @@ RSpec.describe Board do
       expect(cell_3.ship).to eq(cruiser)
       expect(cell_4.ship).to eq(nil)
     end
+  end
+
+  context "#render" do
+     it "renders the board" do
+
+       subject.place(cruiser, ["A1", "A2", "A3"])
+
+       expect(subject.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+       expect(subject.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
   end
 end

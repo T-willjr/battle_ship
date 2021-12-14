@@ -36,7 +36,7 @@ class Cell
 
     if show_ship == true && empty? == false && fired_upon? == false
       "S"
-    elsif show_ship == false && fired_upon? == false
+    elsif fired_upon? == false
       "."
     elsif show_ship == false && fired_upon? == true && empty? == true
       "M"
