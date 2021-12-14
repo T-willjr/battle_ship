@@ -1,7 +1,7 @@
 require "./lib/board"
 require "./lib/ship"
 class Player
-
+  attr_reader :player_board
   def initialize
     @player_board = Board.new
   end
@@ -20,7 +20,7 @@ class Player
   end
 
   def cruiser_placement
-    cruiser_input = gets.chomp.split
+    cruiser_input = gets.chomp.upcase.split
     check_cruiser_coordinates(cruiser_input)
   end
 
@@ -39,7 +39,7 @@ class Player
   def submarine_placement
     submarine = Ship.new("Submarine", 2)
     print "Enter the squares for the Submarine (2 spaces):>"
-    sub_input = gets.chomp.split
+    sub_input = gets.chomp.upcase.split
     check_sub_coordinates(submarine, sub_input)
   end
 
@@ -52,9 +52,4 @@ class Player
       submarine_placement
     end
   end
-
-
 end
-
-player = Player.new
-player.player_setup
