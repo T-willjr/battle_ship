@@ -26,7 +26,7 @@ RSpec.describe Board do
 
   context "#Validating Coordinates" do
     it "tells us if a coordinate is on board" do
-      
+
       expect(subject.valid_coordinate?("A1")).to be true
       expect(subject.valid_coordinate?("D4")).to be true
       expect(subject.valid_coordinate?("A5")).to be false
@@ -97,5 +97,6 @@ RSpec.describe Board do
 
        expect(subject.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
        expect(subject.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
-  end
-end
+     end
+   end
+end 

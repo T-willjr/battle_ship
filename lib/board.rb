@@ -24,7 +24,7 @@ class Board
   def valid_coordinate?(coordinate)
     @cell_hash.keys.include?(coordinate)
   end
-  
+
    def ship_overlap?(coordinates)
     coordinates.any? { |cord|
       @cell_hash[cord].empty? == false}
@@ -48,6 +48,8 @@ class Board
       coordinates.each do |cord|
         @cell_hash[cord].place_ship(ship)
       end
+    end 
+  end
 
 
   def valid_letter_order?(coordinate)
