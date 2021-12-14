@@ -1,6 +1,8 @@
 require 'pry'
 require './lib/board'
 require './lib/ship'
+require './lib/cell'
+
 
 RSpec.describe Board do
   subject {board = Board.new}
@@ -60,6 +62,30 @@ RSpec.describe Board do
       expect(subject.valid_placement?(cruiser, ["B1", "C1", "D1"])).to be true
     end
 
-  end
+    it "makes sure ships cannot overlap" do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+      submarine = Ship.new("Submarine", 2)
+      board.place(cruiser, ["A1", "A2", "A3"])
 
+      expect(board.valid_placement?(submarine, ["A1", "B1"])).to eq(false)
+
+    end
+
+    it "#place a ship, check that all corresponding cells are occupied" do
+      board = Board.new
+      cruiser = Ship.new("Cruiser", 3)
+      cell_1 = board.cells["A1"]
+      cell_2 = board.cells["A2"]
+      cell_3 = board.cells["A3"]
+      cell_4 = board.cells["A4"]
+
+      board.place(cruiser, ["A1", "A2", "A3"])
+
+      expect(cell_1.ship).to eq(cruiser)
+      expect(cell_2.ship).to eq(cruiser)
+      expect(cell_3.ship).to eq(cruiser)
+      expect(cell_4.ship).to eq(nil)
+    end
+  end
 end
