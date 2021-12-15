@@ -13,7 +13,7 @@ class StartGame
   def main_menu
     puts "Welcome to BATTLESHIP"
     puts "Enter p to play. Enter q to quit."
-    main_menu_input = gets.chomp.upcase
+    main_menu_input = gets.chomp.upcase.strip
     main_menu_options(main_menu_input)
   end
 
@@ -33,6 +33,6 @@ class StartGame
   end
 
   def turn
-    @turn.display_boards(@computer.computer_board.render, @player.player_board.render(true))
+    @turn.start_turn(@computer.computer_board, @player.player_board)
   end
 end
