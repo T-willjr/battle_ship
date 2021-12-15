@@ -15,7 +15,7 @@ class ComputerPlayer
   def random_coordinates
       coordinates = ["A1","A2","A3","A4","B1" ,"B2","B3","B4" ,"C1","C2","C3","C4","D1","D2","D3","D4"]
       cruiser_cord = [["A1","A2","A3"], ["B1" ,"B2","B3"],["C1","C2","C3"]]
-      submarine_cord = [["A4","B4"],["B4","C4"],["C4,D4"]]
+      submarine_cord = [["A4","B4"],["B4","C4"],["C4","D4"]]
 
       @comp_cruis_choice = cruiser_cord.sample
       @comp_sub_choice = submarine_cord.sample

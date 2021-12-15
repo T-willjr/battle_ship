@@ -2,6 +2,7 @@ require "./lib/board"
 require "./lib/ship"
 require "./lib/player"
 require "./lib/computer_player"
+require "./lib/start_game"
 require 'pry'
 
 class Turn
@@ -11,6 +12,8 @@ class Turn
     @comp_coordinates = ["A1","A2","A3","A4","B1","B2","B3","B4" ,"C1","C2","C3","C4","D1","D2","D3","D4"]
     @coordinates_fired_on = []
     @computer_input = nil
+    @player_sunken_ships = 0
+    @computer_sunken_ships = 0
   end
 
   def start_turn(computer_board, player_board)
@@ -67,7 +70,17 @@ class Turn
   def results(computer_board,player_board,player_input)
     puts "Your shot on #{player_input} was a #{show_results_player(computer_board,player_input)}"
     puts "My shot on #{@computer_input} was a #{show_results_computer(player_board)} "
-    start_turn(computer_board,player_board)
+    start_end(computer_board,player_board)
+  end
+
+  def start_end(computer_board,player_board)
+    if @player_sunken_ships == 4
+      puts "I won!"
+    elsif @computer_sunken_ships == 4
+      puts "You won!"
+    else
+      start_turn(computer_board,player_board)
+    end
   end
 
   def show_results_player(computer_board,player_input)
@@ -77,6 +90,7 @@ class Turn
     elsif comp_cells.fired_at_cell == true && comp_cells.empty? == false && comp_cells.ship.health > 0
       "Hit"
     elsif comp_cells.fired_at_cell == true && comp_cells.empty? == false && comp_cells.ship.health == 0
+      @computer_sunken_ships +=1
       "hit to sink the ship"
     end
   end
@@ -89,8 +103,8 @@ class Turn
     elsif player_cells.fired_at_cell == true && player_cells.empty? == false && player_cells.ship.health > 0
       "Hit"
     elsif player_cells.fired_at_cell == true && player_cells.empty? == false && player_cells.ship.health == 0
+      @player_sunken_ships +=1
       "hit to sink the ship"
     end
   end
-
 end

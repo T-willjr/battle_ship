@@ -34,5 +34,6 @@ class StartGame
 
   def turn
     @turn.start_turn(@computer.computer_board, @player.player_board)
+    main_menu 
   end
 end
