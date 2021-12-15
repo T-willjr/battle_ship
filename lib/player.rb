@@ -38,7 +38,7 @@ class Player
 
   def submarine_placement
     submarine = Ship.new("Submarine", 2)
-    print "Enter the squares for the Submarine (2 spaces):>"
+    print "Enter the squares for the Submarine (2 spaces):\n>"
     sub_input = gets.chomp.upcase.split
     check_sub_coordinates(submarine, sub_input)
   end
