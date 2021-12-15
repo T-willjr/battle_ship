@@ -99,8 +99,6 @@ class StartGame
   def start_end(computer_board,player_board)
     if @player_sunken_ships == 4
       puts "I won!"
-      @player.player_board = Board.new
-      @computer.computer_board = Board.new
     elsif @computer_sunken_ships == 4
       puts "You won!"
     else
@@ -132,6 +130,4 @@ class StartGame
       "hit to sink the ship"
     end
   end
-
-
 end
