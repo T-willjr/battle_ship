@@ -2,6 +2,7 @@ require "./lib/board"
 require "./lib/ship"
 require "./lib/player"
 require "./lib/computer_player"
+require 'pry'
 
 class Turn
 
@@ -36,6 +37,7 @@ class Turn
   def player_shoots(computer_board,player_board,player_input)
     computer_shoots(player_board)
     computer_board.cells[player_input].fire_upon
+    show_results_player(computer_board,player_input)
     results(computer_board,player_board,player_input)
   end
 
@@ -63,8 +65,32 @@ class Turn
   end
 
   def results(computer_board,player_board,player_input)
-    puts "Your shot on #{player_input} was a #{"Test"}"
-    puts "My shot on #{@computer_input} was a #{"miss"} "
+    puts "Your shot on #{player_input} was a #{show_results_player(computer_board,player_input)}"
+    puts "My shot on #{@computer_input} was a #{show_results_computer(player_board)} "
     start_turn(computer_board,player_board)
   end
+
+  def show_results_player(computer_board,player_input)
+    comp_cells = computer_board.cells[player_input]
+    if comp_cells.fired_at_cell == true && comp_cells.empty? == true
+      "Miss"
+    elsif comp_cells.fired_at_cell == true && comp_cells.empty? == false && comp_cells.ship.health > 0
+      "Hit"
+    elsif comp_cells.fired_at_cell == true && comp_cells.empty? == false && comp_cells.ship.health == 0
+      "hit to sink the ship"
+    end
+  end
+
+  def show_results_computer(player_board)
+    player_cells = player_board.cells[@computer_input]
+
+    if player_cells.fired_at_cell == true && player_cells.empty? == true
+      "Miss"
+    elsif player_cells.fired_at_cell == true && player_cells.empty? == false && player_cells.ship.health > 0
+      "Hit"
+    elsif player_cells.fired_at_cell == true && player_cells.empty? == false && player_cells.ship.health == 0
+      "hit to sink the ship"
+    end
+  end
+
 end

@@ -1,6 +1,6 @@
 require 'pry'
 class Cell
-  attr_reader :coordinate, :ship
+  attr_reader :coordinate, :ship, :fired_at_cell 
 
   def initialize(coordinate)
     @coordinate = coordinate
@@ -38,11 +38,11 @@ class Cell
       "S"
     elsif fired_upon? == false
       "."
-    elsif show_ship == false && fired_upon? == true && empty? == true
+    elsif fired_upon? == true && empty? == true
       "M"
-    elsif show_ship == false && fired_upon? == true && empty? == false && ship.health > 0
+    elsif fired_upon? == true && empty? == false && ship.health > 0
       "H"
-    elsif show_ship == false && fired_upon? == true && empty? == false && ship.health == 0
+    elsif fired_upon? == true && empty? == false && ship.health == 0
       "X"
     end
   end
