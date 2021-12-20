@@ -1,21 +1,18 @@
-require 'pry'
-require './lib/board'
-require './lib/ship'
-require './lib/cell'
-
+require "pry"
+require "./lib/board"
+require "./lib/ship"
+require "./lib/cell"
 
 RSpec.describe Board do
-  subject {board = Board.new}
+  subject { board = Board.new }
   let(:cruiser) { Ship.new("Cruiser", 3) }
   let(:submarine) { Ship.new("Submarine", 2) }
   context "The Cells" do
-
     it "exists" do
       expect(subject).to be_an_instance_of Board
     end
 
     it "has cells" do
-
       expect(subject.cell_hash.count).to eq(16)
 
       subject.cell_hash.each do |coordinate, cell|
@@ -26,7 +23,6 @@ RSpec.describe Board do
 
   context "#Validating Coordinates" do
     it "tells us if a coordinate is on board" do
-
       expect(subject.valid_coordinate?("A1")).to be true
       expect(subject.valid_coordinate?("D4")).to be true
       expect(subject.valid_coordinate?("A5")).to be false
@@ -36,30 +32,25 @@ RSpec.describe Board do
   end
 
   context "#valid_placement?" do
-
     it "validates that ship will fit in coordinates" do
-
       expect(subject.valid_placement?(cruiser, ["A1", "A2"])).to be false
       expect(subject.valid_placement?(submarine, ["A2", "A3", "A4"])).to be false
       expect(subject.valid_placement?(cruiser, ["A1", "A2", "A3"])).to be true
     end
 
     it "makes sure the coordinates are consecutive" do
-
-      expect(subject.valid_placement?(cruiser,["A1", "A2", "A4"])).to be false
-      expect(subject.valid_placement?(submarine,["A1", "C1"])).to be false
-      expect(subject.valid_placement?(cruiser,["A3", "A2", "A1"])).to be false
+      expect(subject.valid_placement?(cruiser, ["A1", "A2", "A4"])).to be false
+      expect(subject.valid_placement?(submarine, ["A1", "C1"])).to be false
+      expect(subject.valid_placement?(cruiser, ["A3", "A2", "A1"])).to be false
       expect(subject.valid_placement?(submarine, ["C1", "B1"])).to be false
     end
 
     it "makes sure coordinates cannot be diagonal" do
-
       expect(subject.valid_placement?(cruiser, ["A1", "B2", "C3"])).to be false
       expect(subject.valid_placement?(submarine, ["C2", "D3"])).to be false
     end
 
     it "makes sure happy paths work" do
-
       expect(subject.valid_placement?(submarine, ["A1", "A2"])).to be true
       expect(subject.valid_placement?(cruiser, ["B1", "C1", "D1"])).to be true
     end
@@ -91,12 +82,11 @@ RSpec.describe Board do
   end
 
   context "#render" do
-     it "renders the board" do
+    it "renders the board" do
+      subject.place(cruiser, ["A1", "A2", "A3"])
 
-       subject.place(cruiser, ["A1", "A2", "A3"])
-
-       expect(subject.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
-       expect(subject.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
-     end
-   end
-end 
+      expect(subject.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(subject.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+    end
+  end
+end
